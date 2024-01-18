@@ -1,4 +1,4 @@
-from Figure import Figure
+from HW2.scr.Figure import Figure
 import math
 
 
@@ -16,3 +16,5 @@ class Circle(Figure):
     def get_perimetr(self):
         p = 2*self.r*math.pi
         return p
+
+
