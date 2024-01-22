@@ -10,9 +10,8 @@ books = open('C:\\Users\\Андрей ПК\\Downloads\\books.csv', newline='')
 books_dict = csv.DictReader(books)
 books_number = 0
 for row in books_dict:
-    books_whithout_publisher.append({'title': row['Title'], 'author': row['Author'], 'pages': row['Pages'],
+    books_whithout_publisher.append({'title': row['Title'], 'author': row['Author'], 'pages': int(row['Pages']),
                                      'genre': row['Genre']})
-    books_number += 1
 
 
 users = open('C:\\Users\\Андрей ПК\\Downloads\\users.json', "r")
@@ -21,10 +20,11 @@ users_number = 0
 for row in users_dict:
     result.append({'name': row['name'], 'gender': row['gender'], 'address': row['address'],
                    'age': row['age'], 'books': []})
-    users_number += 1
 
-books_for_users = books_number//users_number  # расчет того, сколько целых книг может получить каждый пользователь
-difference = books_number % users_number  # расчет остатка при таком распределении
+
+books_for_users = len(books_whithout_publisher)//len(result)  # расчет того, сколько целых книг может получить
+                                                              # каждый пользователь
+difference = len(books_whithout_publisher) % len(result)  # расчет остатка при таком распределении
 
 i = 0  # счетчик пользователей
 z = 0  # счетчик книг
@@ -35,10 +35,7 @@ for user in result:
     else:
         k = 0
     while j < (books_for_users + k):
-        result[i]['books'].append({'title': books_whithout_publisher[z].get('title'),
-                                   'author': books_whithout_publisher[z].get('author'),
-                                   'pages': books_whithout_publisher[z].get('pages'),
-                                   'genre': books_whithout_publisher[z].get('genre')})
+        result[i]['books'].append(books_whithout_publisher[z])
         j += 1
         z += 1
     difference -= 1
