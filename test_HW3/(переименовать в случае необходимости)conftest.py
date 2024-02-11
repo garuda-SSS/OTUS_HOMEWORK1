@@ -23,3 +23,4 @@ def example_triangle():
 @pytest.fixture()
 def example_circle():
     return Circle(10)
+
